@@ -594,7 +594,10 @@
                         </div>
                         <span class="text-xs font-semibold text-brand-600 uppercase tracking-wider">${p.category}</span>
                         <h3 class="font-display font-bold text-base text-slate-900 mt-1">${p.name}</h3>
-                        <p class="text-xs text-slate-500 mt-1 line-clamp-2">${p.desc}</p> </div> <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-100"> <span class="font-display font-bold text-xl text-brand-600">$${p.price.toFixed(2)}</span>
+                        <p class="text-xs text-slate-500 mt-1 line-clamp-2">${p.desc}</p>
+                    </div>
+                    <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
+                        <span class="font-display font-bold text-xl text-brand-600">$${p.price.toFixed(2)}</span>
                         <button onclick="addToCart('${p.name}', ${p.price}, '${p.image}')" class="bg-slate-900 hover:bg-brand-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium transition flex items-center gap-2 active:scale-95">
                             <i class="fa-solid fa-cart-plus"></i> Add
                         </button>
@@ -620,7 +623,27 @@
 
             ['venmo', 'zelle', 'card'].forEach(m => {
                 const btn = document.getElementById(`pay-${m}`);
-                const fields = document.getElementById(`fields-${m}`); if (m === method) { btn.className = "payment-tab border-2 border-brand-600 bg-brand-50 rounded-xl p-3 text-center font-display font-bold text-xs text-brand-700 transition"; fields.classList.remove('hidden'); } else { btn.className = "payment-tab border-2 border-slate-200 rounded-xl p-3 text-center font-display font-bold text-xs text-slate-600 transition"; fields.classList.add('hidden'); } }); }  // Cart Management function addToCart(name, price, image) { const existing = cart.find(item => item.name === name); if (existing) { existing.qty += 1; } else { cart.push({ name, price, image, qty: 1 }); } updateCartUI(); showToast("Added to Cart!", `${name} is now in your bag.`);
+                const fields = document.getElementById(`fields-${m}`);
+                if (m === method) {
+                    btn.className = "payment-tab border-2 border-brand-600 bg-brand-50 rounded-xl p-3 text-center font-display font-bold text-xs text-brand-700 transition";
+                    fields.classList.remove('hidden');
+                } else {
+                    btn.className = "payment-tab border-2 border-slate-200 rounded-xl p-3 text-center font-display font-bold text-xs text-slate-600 transition";
+                    fields.classList.add('hidden');
+                }
+            });
+        }
+
+        // Cart Management
+        function addToCart(name, price, image) {
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ name, price, image, qty: 1 });
+            }
+            updateCartUI();
+            showToast("Added to Cart!", `${name} is now in your bag.`);
         }
 
         function updateQuantity(name, change) {
@@ -673,7 +696,92 @@
                 div.innerHTML = `
                     <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover bg-white">
                     <div class="flex-1">
-                        <h4 class="font-display font-bold text-sm text-slate-900">${item.name}</h4> <p class="text-xs text-brand-600 font-semibold">$${item.price.toFixed(2)}</p>
+                        <h4 class="font-display font-bold text-sm text-slate-900">${item.name}</h4>
+                        <p class="text-xs text-brand-600 font-semibold">$${item.price.toFixed(2)}</p>
                         <div class="flex items-center gap-2 mt-2">
                             <button type="button" onclick="updateQuantity('${item.name}', -1)" class="w-6 h-6 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-xs font-bold hover:bg-slate-100">-</button>
-                            <span class="text-xs font-bold
+                            <span class="text-xs font-bold">${item.qty}</span>
+                            <button type="button" onclick="updateQuantity('${item.name}', 1)" class="w-6 h-6 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-xs font-bold hover:bg-slate-100">+</button>
+                        </div>
+                    </div>
+                `;
+                itemsContainer.appendChild(div);
+            });
+
+            subtotalEl.innerText = `$${subtotal.toFixed(2)}`;
+
+            let shippingFee = 0;
+            if (fulfillmentType === 'shipping') {
+                shippingFee = 4.99;
+                fulfillmentLabel.innerText = "US Mail Shipping ($4.99)";
+            } else {
+                shippingFee = subtotal >= 25 || subtotal === 0 ? 0 : 3.00;
+                fulfillmentLabel.innerText = shippingFee === 0 ? "Free Local Gorge Delivery ($0)" : "Gorge Valley Delivery ($3.00)";
+            }
+
+            const grandTotal = subtotal + shippingFee;
+            totalEl.innerText = `$${grandTotal.toFixed(2)}`;
+            
+            // Populate hidden inputs for Web3Forms email submission
+            summaryInput.value = summaryString + `Fulfillment: ${fulfillmentType} | Subtotal: $${subtotal.toFixed(2)} | Shipping: $${shippingFee.toFixed(2)}`;
+            totalAmountInput.value = `$${grandTotal.toFixed(2)}`;
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function updateFulfillmentType(type) {
+            fulfillmentType = type;
+            updateCartUI();
+        }
+
+        function openCheckoutModal() {
+            if (cart.length === 0) {
+                showToast("Cart is empty", "Please add items before checking out.", "error");
+                return;
+            }
+            toggleCart();
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function openCustomModal() {
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        function closeCustomModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        function showToast(title, desc, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastTitle = document.getElementById('toast-title');
+            const toastDesc = document.getElementById('toast-desc');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastTitle.innerText = title;
+            toastDesc.innerText = desc;
+            
+            if(type === 'error') {
+                toastIcon.className = "fa-solid fa-circle-exclamation text-rose-500 text-xl";
+            } else {
+                toastIcon.className = "fa-solid fa-circle-check text-brand-500 text-xl";
+            }
+
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3500);
+        }
+
+        window.onload = function() {
+            renderProducts('all');
+        }
+    </script>
+</body>
+</html>
