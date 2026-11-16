@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hood River 3D Prints | Local Kids & Family 3D Prints</title>
+    <title>Hood River 3D Prints | DIY 3D Kits & Ornaments for Hood River Families</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -14,7 +14,6 @@
                         brand: {
                             50: '#f0fdf4',
                             100: '#dcfce7',
-                            250: '#86efac',
                             500: '#22c55e',
                             600: '#16a34a',
                             700: '#15803d',
@@ -28,62 +27,82 @@
             }
         }
     </script>
+    <style>
+        .bg-dots {
+            background-image: radial-gradient(rgba(16, 185, 129, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
 </head>
-<body class="bg-emerald-50/30 text-slate-800 font-sans antialiased">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased bg-dots">
 
     <!-- Top Announcement Banner -->
-    <div class="bg-gradient-to-r from-brand-600 to-emerald-600 text-white text-xs sm:text-sm font-semibold py-2.5 px-4 text-center shadow-sm">
-        🎈 Local Hood River Pickup Available • Free Gorge Delivery on Orders $25+! 🎈
+    <div class="bg-cyan-500 text-white text-xs sm:text-sm font-bold py-2.5 px-4 text-center shadow-sm flex items-center justify-center gap-2">
+        <span>🌲 Handcrafted in Hood River, OR • Free local porch delivery on orders over $25 in the Gorge! 🍎</span>
     </div>
 
     <!-- Header / Navbar -->
-    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-emerald-100 shadow-sm">
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-emerald-600 flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-brand-500/30">
+                <div class="w-12 h-12 rounded-2xl bg-brand-500 flex items-center justify-center text-white font-black text-2xl shadow-md shadow-brand-500/20">
                     <i class="fa-solid fa-cube"></i>
                 </div>
                 <div>
-                    <span class="font-black text-xl tracking-tight text-slate-900 block">Hood River 3D</span>
-                    <span class="text-xs font-bold text-brand-600 tracking-wide uppercase">Kids & Family Prints</span>
+                    <span class="font-black text-xl tracking-tight text-slate-900 block leading-none mb-1">Hood River 3D</span>
+                    <span class="text-[11px] font-black text-emerald-600 tracking-wider uppercase">Kids & Ornaments</span>
                 </div>
             </div>
             
             <nav class="hidden md:flex items-center space-x-8 text-sm font-bold text-slate-600">
                 <a href="#catalog" class="hover:text-brand-600 transition">Catalog</a>
                 <a href="#delivery" class="hover:text-brand-600 transition">Gorge Delivery</a>
+                <a href="#custom" class="hover:text-brand-600 transition">Custom Prints</a>
                 <a href="#faq" class="hover:text-brand-600 transition">FAQ</a>
             </nav>
 
             <div class="flex items-center space-x-4">
-                <button onclick="openCartModal()" class="relative bg-emerald-100 hover:bg-emerald-200 text-slate-900 px-5 py-3 rounded-2xl font-bold text-sm transition flex items-center space-x-2.5 shadow-sm">
-                    <i class="fa-solid fa-cart-shopping text-brand-600 text-base"></i>
+                <button onclick="openCartModal()" class="relative bg-slate-100 hover:bg-slate-200 text-slate-900 px-5 py-3 rounded-2xl font-bold text-sm transition flex items-center space-x-2 shadow-sm border border-slate-200">
+                    <i class="fa-solid fa-cart-shopping text-brand-600"></i>
                     <span>Cart</span>
-                    <span id="cart-badge" class="bg-brand-600 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-black shadow-sm">0</span>
+                    <span id="cart-badge" class="bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-black shadow-sm">0</span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative overflow-hidden bg-gradient-to-b from-brand-50/80 via-white to-emerald-50/20 py-16 sm:py-24 border-b border-emerald-100/60">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <span class="inline-flex items-center gap-1.5 bg-brand-100 text-brand-700 font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-full mb-6 shadow-sm border border-brand-200">
-                <i class="fa-solid fa-location-dot"></i> Designed & Printed in the Columbia Gorge
+    <section class="relative overflow-hidden py-16 sm:py-24 border-b border-slate-200/60">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-800 font-extrabold text-xs uppercase tracking-wider px-4 py-2 rounded-full mb-6 shadow-sm border border-emerald-200">
+                🌱 New DIY Paint Kits & 2026 Ornaments • $3 to $8 Unbeatable Prices!
             </span>
-            <h1 class="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight mb-6 max-w-3xl mx-auto leading-tight">
-                Fun, Affordable 3D Prints for <span class="text-brand-600 underline decoration-brand-200 decoration-wavy">Kids & Families</span>
+            <h1 class="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
+                DIY 3D Kits & Ornaments for <span class="text-brand-600">Hood</span> <span class="text-cyan-500">River</span> <span class="text-sky-400">Families</span>
             </h1>
-            <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 font-medium">
-                Tabletop balancing games, 6-piece DIY ornament kits, and paint-your-own stem toys. Ultra-competitive impulse-buy pricing from $3 to $8!
+            <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto mb-10 font-medium leading-relaxed">
+                Zero clutter, maximum fun. Ultra-affordable plant-based 3D printed toys, balancing games, and 6-piece holiday photo frame ornament sets crafted right here in the Columbia River Gorge.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#catalog" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-brand-500/30 transition text-center text-base transform hover:-translate-y-0.5">
-                    Browse Bubbly Catalog 🎨
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+                <a href="#catalog" class="bg-brand-600 hover:bg-brand-700 text-white font-black px-8 py-4 rounded-2xl shadow-xl shadow-brand-500/25 transition text-center text-base flex items-center justify-center gap-2">
+                    <span>Shop $3 - $8 DIY Kits</span>
+                    <i class="fa-solid fa-arrow-down text-sm"></i>
                 </a>
-                <a href="#delivery" class="bg-white hover:bg-emerald-50 text-slate-700 border-2 border-emerald-200 font-bold px-8 py-4 rounded-2xl transition text-center text-base shadow-sm">
-                    Local Pickup Info
+                <a href="#delivery" class="bg-white hover:bg-slate-50 text-slate-700 border-2 border-slate-200 font-black px-8 py-4 rounded-2xl transition text-center text-base shadow-sm">
+                    🚚 Local Gorge Delivery
                 </a>
             </div>
-        </div>
-    </section>
+
+            <!-- Stats/Highlights Row -->
+            <div class="grid grid-cols-3 gap-4 max-w-xl mx-auto pt-6 border-t border-slate-200/60 text-slate-700">
+                <div>
+                    <div class="font-black text-slate-900 text-lg sm:text-xl">$3 - $8</div>
+                    <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Unbeatable Local Value</div>
+                </div>
+                <div>
+                    <div class="font-black text-slate-900 text-lg sm:text-xl">DIY + Paint</div>
+                    <div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Paints & Brushes Included</div>
+                </div>
+                <div>
+                    <div class="font-black text-slate-900 text-lg sm:text-xl">PLA+</div>
+                    <div class="text-[11px] font-bold text-slate
