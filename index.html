@@ -1,25 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hood River 3D | Magical 3D Prints, DIY Kits & Ornaments</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Hood River 3D Prints | Local Kids & Family 3D Prints</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter & Fredoka for kid-friendly modern look -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Fredoka', 'sans-serif'],
-                    },
                     colors: {
                         brand: {
                             50: '#f0fdf4',
@@ -27,743 +17,82 @@
                             500: '#22c55e',
                             600: '#16a34a',
                             700: '#15803d',
-                            coral: '#ff6b6b',
-                            sky: '#38bdf8',
-                            sun: '#facc15'
                         }
                     }
                 }
             }
         }
     </script>
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, .font-display { font-family: 'Fredoka', sans-serif; }
-        .hero-pattern {
-            background-color: #f8fafc;
-            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-            background-size: 24px 24px;
-        }
-    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-    <!-- Top Announcement Bar -->
-    <div class="bg-gradient-to-r from-brand-sky via-brand-600 to-brand-coral text-white text-xs sm:text-sm font-medium py-2 px-4 text-center">
-        🌲 Handcrafted in Hood River, OR • Free local porch delivery on orders over $25 in the Gorge! 🍎
+    <!-- Top Banner -->
+    <div class="bg-brand-600 text-white text-xs sm:text-sm font-medium py-2 px-4 text-center">
+        ✨ Local Hood River Pickup Available • Free Gorge Delivery on Orders $25+! ✨
     </div>
 
-    <!-- Navigation Bar -->
-    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-500 to-brand-sky flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition">
-                    <i class="fa-solid fa-cube text-2xl"></i>
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                    <i class="fa-solid fa-cube"></i>
                 </div>
-                <div>
-                    <span class="font-display text-xl sm:text-2xl font-bold tracking-tight text-slate-900 block leading-none">Hood River 3D</span>
-                    <span class="text-xs text-brand-600 font-semibold uppercase tracking-widest mt-1 block">Kids & Ornaments</span>
-                </div>
-            </a>
-
-            <!-- Desktop Nav Links -->
-            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-600">
+                <span class="font-bold text-lg sm:text-xl tracking-tight text-slate-900">Hood River 3D</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
                 <a href="#catalog" class="hover:text-brand-600 transition">Catalog</a>
-                <a href="#local-gorge" class="hover:text-brand-600 transition">Gorge Delivery</a>
-                <a href="#custom" class="hover:text-brand-600 transition">Custom Prints</a>
+                <a href="#delivery" class="hover:text-brand-600 transition">Gorge Delivery</a>
                 <a href="#faq" class="hover:text-brand-600 transition">FAQ</a>
             </nav>
 
-            <!-- Actions / Cart Button -->
-            <div class="flex items-center gap-4">
-                <button onclick="toggleCart()" class="relative bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2.5 rounded-xl font-medium flex items-center gap-2.5 transition active:scale-95">
-                    <i class="fa-solid fa-bag-shopping text-brand-600 text-lg"></i>
+            <div class="flex items-center space-x-4">
+                <button onclick="openCartModal()" class="relative bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2 rounded-xl font-medium text-sm transition flex items-center space-x-2">
+                    <i class="fa-solid fa-cart-shopping text-brand-600"></i>
                     <span class="hidden sm:inline">Cart</span>
-                    <span id="cart-badge" class="bg-brand-coral text-white text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+                    <span id="cart-badge" class="bg-brand-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-pattern relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 bg-brand-100 text-brand-700 px-4 py-1.5 rounded-full text-sm font-semibold">
-                        <i class="fa-solid fa-paintbrush"></i> New DIY Paint Kits & 2026 Ornaments • $3 to $8 Unbeatable Prices!
-                    </div>
-                    <h1 class="font-display text-4xl sm:text-6xl font-bold text-slate-900 tracking-tight leading-tight">
-                        DIY 3D Kits & Ornaments for <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-sky">Hood River Families</span>
-                    </h1>
-                    <p class="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0">
-                        Zero clutter, maximum fun. Ultra-affordable plant-based 3D printed toys, balancing games, and 6-piece holiday photo frame ornament sets crafted right here in the Columbia River Gorge.
-                    </p>
-                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#catalog" class="bg-brand-600 hover:bg-brand-700 text-white font-display text-lg px-8 py-4 rounded-2xl shadow-lg shadow-brand-600/25 transition hover:scale-105 active:scale-95 flex items-center gap-3">
-                            <span>Shop $3 - $8 DIY Kits</span>
-                            <i class="fa-solid fa-arrow-down"></i>
-                        </a>
-                        <a href="#local-gorge" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-medium px-6 py-4 rounded-2xl transition flex items-center gap-2">
-                            <i class="fa-solid fa-truck-fast text-brand-500"></i>
-                            <span>Local Gorge Delivery</span>
-                        </a>
-                    </div>
-                    <!-- Trust Badges -->
-                    <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-200/80 max-w-lg mx-auto lg:mx-0">
-                        <div class="text-center lg:text-left">
-                            <p class="font-display font-bold text-xl text-slate-900">$3 - $8</p>
-                            <p class="text-xs text-slate-500">Unbeatable Local Value</p>
-                        </div>
-                        <div class="text-center lg:text-left">
-                            <p class="font-display font-bold text-xl text-slate-900">DIY + Paint</p>
-                            <p class="text-xs text-slate-500">Paints & Brushes Included</p>
-                        </div>
-                        <div class="text-center lg:text-left">
-                            <p class="font-display font-bold text-xl text-slate-900">PLA+</p>
-                            <p class="text-xs text-slate-500">Eco Plant Plastic</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hero Graphic / Featured Card -->
-                <div class="lg:col-span-5 flex justify-center">
-                    <div class="relative w-full max-w-md bg-white p-6 rounded-3xl shadow-2xl shadow-slate-200 border border-slate-100 group">
-                        <div class="absolute -top-4 -right-4 bg-brand-coral text-white font-display font-bold text-xs uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md rotate-3">
-                            🎄 6-Piece Set + Paints!
-                        </div>
-                        <div class="aspect-square bg-gradient-to-br from-emerald-50 to-brand-100 rounded-2xl overflow-hidden flex items-center justify-center relative mb-6">
-                            <img src="https://placehold.co/500x500/dcfce7/16a34a?text=6-Piece+Ornament+Kit" alt="6-Piece Photo Frame Ornament Kit" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <span class="text-xs font-semibold text-brand-600 uppercase tracking-wider">Holiday Special</span>
-                                    <h3 class="font-display text-xl font-bold text-slate-900">6-Piece Photo Frame Ornament Kit</h3>
-                                </div>
-                                <span class="font-display font-bold text-xl text-brand-600">$8.00</span>
-                            </div>
-                            <p class="text-sm text-slate-500">Includes 6 assorted 2026 photo frame ornaments, hanging ribbons, and primary paint strips. Perfect family holiday craft!</p>
-                            <button onclick="addToCart('6-Piece Photo Frame Ornament Kit', 8.00, 'https://placehold.co/500x500/dcfce7/16a34a?text=Ornament+Kit')" class="w-full mt-4 bg-slate-900 hover:bg-brand-600 text-white font-medium py-3 rounded-xl transition flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                <span>Add to Cart • $8.00</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+    <section class="relative overflow-hidden bg-gradient-to-b from-brand-50/50 to-white py-16 sm:py-24 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="inline-block bg-brand-100 text-brand-700 font-semibold text-xs uppercase tracking-wider px-3 py-1 rounded-full mb-4">
+                Designed & Printed in the Columbia Gorge
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight mb-6 max-w-3xl mx-auto">
+                Fun, Affordable 3D Prints for <span class="text-brand-600">Kids & Families</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-8">
+                Tabletop balancing games, 6-piece DIY ornament kits, and paint-your-own stem toys. Ultra-competitive impulse-buy pricing from $3 to $8!
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#catalog" class="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-8 py-3.5 rounded-2xl shadow-lg shadow-brand-500/20 transition text-center">
+                    Browse Catalog
+                </a>
+                <a href="#delivery" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-semibold px-8 py-3.5 rounded-2xl transition text-center">
+                    Local Pickup Info
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Main Catalog Section -->
-    <section id="catalog" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+    <!-- Catalog Section -->
+    <section id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex justify-between items-end mb-8">
             <div>
-                <span class="text-brand-600 font-semibold uppercase tracking-wider text-sm block mb-1">Gorge Value Collection</span>
-                <h2 class="font-display text-3xl sm:text-4xl font-bold text-slate-900">DIY Kits & Ornaments ($3 - $8)</h2>
-            </div>
-            <!-- Category Filter Tabs -->
-            <div class="flex flex-wrap gap-2" id="category-filters">
-                <button onclick="filterCategory('all', this)" class="filter-btn active bg-slate-900 text-white px-4 py-2 rounded-xl text-sm font-medium transition">All Items</button>
-                <button onclick="filterCategory('ornaments', this)" class="filter-btn bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 px-4 py-2 rounded-xl text-sm font-medium transition">Ornaments & Keepsakes</button>
-                <button onclick="filterCategory('diy', this)" class="filter-btn bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 px-4 py-2 rounded-xl text-sm font-medium transition">DIY Paint & Balance Kits</button>
-                <button onclick="filterCategory('fidgets', this)" class="filter-btn bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 px-4 py-2 rounded-xl text-sm font-medium transition">Fidgets & Flexis</button>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Featured Prints & Kits</h2>
+                <p class="text-slate-600 text-sm mt-1">Open-license designs hand-crafted and ready for local pickup or shipping.</p>
             </div>
         </div>
 
         <!-- Product Grid -->
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Dynamic Products Injected via JavaScript -->
-        </div>
-    </section>
-
-    <!-- Local Gorge Delivery Highlight -->
-    <section id="local-gorge" class="bg-gradient-to-r from-brand-600 to-brand-sky py-16 text-white my-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-7 space-y-4">
-                    <span class="bg-white/20 text-white px-4 py-1.5 rounded-full text-sm font-semibold backdrop-blur-sm">
-                        🍎 Hood River Valley & Gorge Locals
-                    </span>
-                    <h2 class="font-display text-3xl sm:text-4xl font-bold">Fast Local Drop-Offs & Porch Delivery</h2>
-                    <p class="text-white/90 text-lg leading-relaxed">
-                        Live around Hood River, Odell, Parkdale, or Bingen/White Salmon? Skip shipping fees! We offer convenient local porch delivery or pickup options so your kids can get their new toys right away.
-                    </p>
-                    <ul class="space-y-2 text-white/90 font-medium">
-                        <li><i class="fa-solid fa-check text-brand-sun mr-2"></i> Free Local Delivery on orders over $25 (Hood River city limits).</li>
-                        <li><i class="fa-solid fa-check text-brand-sun mr-2"></i> Flat $3 Gorge delivery for surrounding valley areas.</li>
-                        <li><i class="fa-solid fa-check text-brand-sun mr-2"></i> Venmo, Zelle, and Card payments accepted seamlessly.</li>
-                    </ul>
-                </div>
-                <div class="lg:col-span-5 bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 text-center space-y-4">
-                    <i class="fa-solid fa-map-location-dot text-5xl text-brand-sun"></i>
-                    <h3 class="font-display text-2xl font-bold">Local Meetup / Pickup Spot</h3>
-                    <p class="text-sm text-white/80">Grab your prints near downtown Hood River or opt for direct home delivery during checkout.</p>
-                    <div class="pt-2">
-                        <span class="inline-block bg-white text-slate-900 font-bold px-6 py-3 rounded-2xl shadow-lg">
-                            📍 Hood River, OR 97031
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Custom Request Banner -->
-    <section id="custom" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
-            <div class="space-y-3 max-w-xl">
-                <div class="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Custom 3D Printing
-                </div>
-                <h3 class="font-display text-2xl sm:text-3xl font-bold text-slate-900">Looking for a Specific Toy or Custom Ornament?</h3>
-                <p class="text-slate-600 text-sm sm:text-base">
-                    Have a favorite character, personalized name tag, or unique holiday idea in mind? Let us know what you're looking for, and we can print it for you!
-                </p>
-            </div>
-            <button onclick="openCustomModal()" class="whitespace-nowrap bg-slate-900 hover:bg-brand-600 text-white font-display font-medium px-8 py-4 rounded-2xl transition shadow-md">
-                Request Custom Print
-            </button>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <span class="text-brand-600 font-semibold uppercase tracking-wider text-sm block mb-1">Got Questions?</span>
-            <h2 class="font-display text-3xl font-bold text-slate-900">Frequently Asked Questions</h2>
-        </div>
-        <div class="space-y-4">
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                <h4 class="font-display font-bold text-lg text-slate-900 mb-2">Are these prints safe for younger kids?</h4>
-                <p class="text-sm text-slate-600">Yes! We use non-toxic, biodegradable PLA+ plastic derived from cornstarch. However, toys with smaller parts are recommended for children ages 4 and up with adult supervision.</p>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                <h4 class="font-display font-bold text-lg text-slate-900 mb-2">How does Hood River local delivery work?</h4>
-                <p class="text-sm text-slate-600">When you check out, select "Local Gorge Delivery". We will text or email you to coordinate a convenient drop-off time right to your porch or meeting spot in Hood River or nearby.</p>
-            </div>
-            <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                <h4 class="font-display font-bold text-lg text-slate-900 mb-2">What payment methods do you accept?</h4>
-                <p class="text-sm text-slate-600">We accept peer-to-peer transfers via **Venmo** and **Zelle**, as well as secure credit/debit card checkout.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-white py-12 mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div class="space-y-4 md:col-span-2">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-brand-500 flex items-center justify-center text-white font-bold">
-                        <i class="fa-solid fa-cube"></i>
-                    </div>
-                    <span class="font-display text-xl font-bold">Hood River 3D Prints</span>
-                </div>
-                <p class="text-slate-400 text-sm max-w-sm">
-                    Bringing imagination to life with plant-based 3D printing for kids, geeks, and local families in the Columbia River Gorge.
-                </p>
-            </div>
-            <div>
-                <h5 class="font-display font-bold mb-4 text-slate-200">Quick Links</h5>
-                <ul class="space-y-2 text-sm text-slate-400">
-                    <li><a href="#catalog" class="hover:text-white transition">Catalog</a></li>
-                    <li><a href="#local-gorge" class="hover:text-white transition">Gorge Delivery</a></li>
-                    <li><a href="#custom" class="hover:text-white transition">Custom Prints</a></li>
-                    <li><a href="#faq" class="hover:text-white transition">FAQ</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="font-display font-bold mb-4 text-slate-200">Community</h5>
-                <p class="text-sm text-slate-400 mb-3">Proudly serving Hood River, Odell, Parkdale & White Salmon.</p>
-                <div class="flex gap-3 text-slate-400 text-lg">
-                    <a href="#" class="hover:text-brand-sky transition"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="hover:text-brand-sky transition"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" class="hover:text-brand-sky transition"><i class="fa-brands fa-discord"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
-            &copy; 2026 Hood River 3D Prints. Crafted with care in Hood River, Oregon.
-        </div>
-    </footer>
-
-    <!-- Slide-Over Shopping Cart Drawer -->
-    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden">
-        <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity" onclick="toggleCart()"></div>
-        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
-            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
-                <!-- Cart Header -->
-                <div class="p-6 border-b border-slate-100 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-bag-shopping text-brand-600 text-xl"></i>
-                        <h3 class="font-display font-bold text-xl text-slate-900">Your Cart</h3>
-                    </div>
-                    <button onclick="toggleCart()" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition">
-                        <i class="fa-solid fa-xmark text-lg"></i>
-                    </button>
-                </div>
-                <!-- Cart Items List -->
-                <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-                    <!-- Dynamic cart items here -->
-                </div>
-                <!-- Cart Footer / Checkout -->
-                <div class="p-6 border-t border-slate-100 bg-slate-50 space-y-4">
-                    <div class="space-y-2">
-                        <div class="flex justify-between text-sm text-slate-600">
-                            <span>Subtotal</span>
-                            <span id="cart-subtotal" class="font-bold text-slate-900">$0.00</span>
-                        </div>
-                        <div class="flex justify-between text-sm text-slate-600">
-                            <span>Fulfillment Option</span>
-                            <span id="cart-fulfillment-label" class="font-semibold text-brand-600">Local Delivery ($0)</span>
-                        </div>
-                        <div class="flex justify-between text-base font-bold text-slate-900 pt-2 border-t border-slate-200">
-                            <span>Total</span>
-                            <span id="cart-total">$0.00</span>
-                        </div>
-                    </div>
-                    <button onclick="openCheckoutModal()" id="checkout-btn" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-display text-lg py-4 rounded-2xl shadow-lg shadow-brand-600/20 transition flex items-center justify-center gap-2">
-                        <span>Proceed to Checkout</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Checkout Modal -->
-    <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto hidden">
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeCheckoutModal()"></div>
-        <div class="relative bg-white w-full max-w-xl rounded-3xl shadow-2xl p-6 sm:p-8 overflow-hidden z-10 my-8">
-            <div class="flex justify-between items-center mb-6">
-                <div>
-                    <span class="text-xs font-semibold text-brand-600 uppercase tracking-widest">Secure Checkout</span>
-                    <h3 class="font-display text-2xl font-bold text-slate-900">Complete Your Order</h3>
-                </div>
-                <button onclick="closeCheckoutModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <form id="order-form" onsubmit="submitOrder(event)" class="space-y-6">
-                <input type="hidden" name="access_key" value="641c5fc4-720f-4cd9-b4eb-64adf80dc9be">
-                <!-- Contact info -->
-                <div class="space-y-4">
-                    <h4 class="font-display font-bold text-sm text-slate-700 uppercase tracking-wider">1. Contact Information</h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Your Name</label>
-                            <input type="text" required placeholder="Alex Smith" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">Phone Number (for Gorge drop-off text)</label>
-                            <input type="tel" required placeholder="(541) 555-0199" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fulfillment Method -->
-                <div class="space-y-4">
-                    <h4 class="font-display font-bold text-sm text-slate-700 uppercase tracking-wider">2. Choose Delivery or Shipping</h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <label class="border border-slate-200 rounded-2xl p-4 flex items-start gap-3 cursor-pointer hover:border-brand-500 transition has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50">
-                            <input type="radio" name="fulfillment" value="local" checked onchange="updateFulfillmentType('local')" class="mt-1 text-brand-600 focus:ring-brand-500">
-                            <div>
-                                <span class="font-display font-bold text-sm text-slate-900 block">Local Gorge Delivery</span>
-                                <span class="text-xs text-slate-500">Free in Hood River (Orders $25+) or $3 valley delivery.</span>
-                            </div>
-                        </label>
-                        <label class="border border-slate-200 rounded-2xl p-4 flex items-start gap-3 cursor-pointer hover:border-brand-500 transition has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50">
-                            <input type="radio" name="fulfillment" value="shipping" onchange="updateFulfillmentType('shipping')" class="mt-1 text-brand-600 focus:ring-brand-500">
-                            <div>
-                                <span class="font-display font-bold text-sm text-slate-900 block">US Mail Shipping</span>
-                                <span class="text-xs text-slate-500">Standard flat rate US shipping ($4.99).</span>
-                            </div>
-                        </label>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1">Delivery Address / Hood River Neighborhood</label>
-                        <input type="text" required placeholder="123 Oak St, Hood River, OR" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
-                    </div>
-                </div>
-
-                <!-- Payment simulation -->
-                <div class="space-y-4">
-                    <h4 class="font-display font-bold text-sm text-slate-700 uppercase tracking-wider">3. Payment (Venmo, Zelle, Card)</h4>
-                    <div class="grid grid-cols-3 gap-2 mb-2">
-                        <button type="button" onclick="setPaymentMethod('venmo')" id="pay-venmo" class="payment-tab border-2 border-brand-600 bg-brand-50 rounded-xl p-3 text-center font-display font-bold text-xs text-brand-700 transition">
-                            <i class="fa-brands fa-vimeo text-lg block mb-1"></i> Venmo
-                        </button>
-                        <button type="button" onclick="setPaymentMethod('zelle')" id="pay-zelle" class="payment-tab border-2 border-slate-200 rounded-xl p-3 text-center font-display font-bold text-xs text-slate-600 transition">
-                            <i class="fa-solid fa-bolt text-lg block mb-1 text-purple-600"></i> Zelle
-                        </button>
-                        <button type="button" onclick="setPaymentMethod('card')" id="pay-card" class="payment-tab border-2 border-slate-200 rounded-xl p-3 text-center font-display font-bold text-xs text-slate-600 transition">
-                            <i class="fa-solid fa-credit-card text-lg block mb-1 text-slate-700"></i> Card
-                        </button>
-                    </div>
-
-                    <div id="payment-fields-container" class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
-                        <div id="fields-venmo">
-                            <p class="text-xs text-slate-600 mb-2">Send payment via Venmo to <strong class="text-slate-900">@HoodRiver3D</strong> after placing order.</p>
-                            <input type="text" placeholder="Your Venmo Handle (e.g. @Alex-Smith)" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
-                        </div>
-                        <div id="fields-zelle" class="hidden">
-                            <p class="text-xs text-slate-600 mb-2">Send payment via Zelle to <strong class="text-slate-900">pay@hoodriver3dprints.com</strong>.</p>
-                            <input type="text" placeholder="Your Zelle Name / Phone Number" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
-                        </div>
-                        <div id="fields-card" class="hidden space-y-3">
-                            <input type="text" placeholder="Card Number" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
-                            <div class="grid grid-cols-2 gap-3">
-                                <input type="text" placeholder="MM / YY" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
-                                <input type="text" placeholder="CVC" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-display text-lg py-4 rounded-2xl shadow-lg shadow-brand-600/25 transition flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-lock text-sm"></i>
-                    <span>Place Order Now</span>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Custom Request Modal -->
-    <div id="custom-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto hidden">
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeCustomModal()"></div>
-        <div class="relative bg-white w-full max-w-lg rounded-3xl shadow-2xl p-6 sm:p-8 z-10">
-            <div class="flex justify-between items-center mb-6">
-                <div>
-                    <span class="text-xs font-semibold text-brand-600 uppercase tracking-widest">Custom 3D Print Request</span>
-                    <h3 class="font-display text-2xl font-bold text-slate-900">What can we print for you?</h3>
-                </div>
-                <button onclick="closeCustomModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <form onsubmit="submitCustomRequest(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Your Name</label>
-                    <input type="text" required placeholder="Sam Taylor" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Email or Phone</label>
-                    <input type="text" required placeholder="sam@example.com" class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Describe Your Idea or Ornament</label>
-                    <textarea rows="3" required placeholder="E.g., A custom 2026 ornament with our family dog's name..." class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-slate-900 hover:bg-brand-600 text-white font-display py-3.5 rounded-xl transition">
-                    Send Custom Request
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Toast Notification Message Box -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 transform translate-y-32 opacity-0 transition-all duration-300">
-        <i id="toast-icon" class="fa-solid fa-circle-check text-brand-500 text-xl"></i>
-        <div>
-            <p id="toast-title" class="font-display font-bold text-sm">Item added!</p>
-            <p id="toast-desc" class="text-xs text-slate-400">Successfully updated your cart.</p>
-        </div>
-    </div>
-
-    <!-- JavaScript Application Logic -->
-    <script>
-        // Product Catalog Database with $3 to $8 impulse pricing & new 6-piece ornament kit
-        const products = [
-            {
-                id: 1,
-                name: "6-Piece Photo Frame Ornament Kit",
-                category: "ornaments",
-                price: 8.00,
-                rating: "5.0",
-                image: "https://placehold.co/500x500/dcfce7/16a34a?text=6-Piece+Ornament+Kit",
-                desc: "6 assorted 2026 holiday picture frame ornaments with hanging ribbons and mini paint pots."
-            },
-            {
-                id: 2,
-                name: "Table-Top Primary Balancing Game",
-                category: "diy",
-                price: 7.50,
-                rating: "4.9",
-                image: "https://placehold.co/500x500/fef3c7/d97706?text=Balancing+Game+Kit",
-                desc: "Primary color stackable blocks and rocker base. Great family strategy game!"
-            },
-            {
-                id: 3,
-                name: "Paint-Your-Own Forest Critter",
-                category: "diy",
-                price: 5.00,
-                rating: "5.0",
-                image: "https://placehold.co/500x500/e0f2fe/0284c7?text=Forest+Critter+Kit",
-                desc: "Snap-fit fox or squirrel figurine + 4 mini acrylic paint pots and detail brush."
-            },
-            {
-                id: 4,
-                name: "Single 2026 Keepsake Ornament",
-                category: "ornaments",
-                price: 3.50,
-                rating: "4.8",
-                image: "https://placehold.co/500x500/ede9fe/7c3aed?text=Single+2026+Ornament",
-                desc: "Single customizable 2026 holiday picture frame ornament with ribbon."
-            },
-            {
-                id: 5,
-                name: "Flexi Mini Gorge Dragon Fidget",
-                category: "fidgets",
-                price: 4.50,
-                rating: "5.0",
-                image: "https://placehold.co/500x500/ffedd5/c2410c?text=Mini+Flexi+Dragon",
-                desc: "Pocket-sized articulated dragon with wiggly joints. Huge kid favorite!"
-            },
-            {
-                id: 6,
-                name: "Gear-Spin Mechanical Robot Buddy",
-                category: "diy",
-                price: 6.50,
-                rating: "4.9",
-                image: "https://placehold.co/500x500/ccfbf1/0d9488?text=Robot+Buddy+Kit",
-                desc: "Interlocking plastic gears and hand-crank to build a working mini machine."
-            },
-            {
-                id: 7,
-                name: "Rocket Ship Desk Launcher",
-                category: "diy",
-                price: 4.00,
-                rating: "4.7",
-                image: "https://placehold.co/500x500/fee2e2/dc2626?text=Rocket+Launcher",
-                desc: "Modular 3-piece rocket model that snaps together in seconds."
-            },
-            {
-                id: 8,
-                name: "Mount Hood Keychain & Tag",
-                category: "fidgets",
-                price: 3.00,
-                rating: "4.8",
-                image: "https://placehold.co/500x500/f1f5f9/475569?text=Mt+Hood+Tag",
-                desc: "Durable two-tone backpack tag for school kids and Gorge explorers."
-            }
-        ];
-
-        let cart = [];
-        let fulfillmentType = 'local';
-        let currentPayment = 'venmo';
-
-        // Render Catalog Products
-        function renderProducts(filter = 'all') {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
-
-            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
-
-            filtered.forEach(p => {
-                const card = document.createElement('div');
-                card.className = "bg-white rounded-3xl p-5 border border-slate-200/80 shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group";
-                card.innerHTML = `
-                    <div>
-                        <div class="aspect-square bg-slate-50 rounded-2xl overflow-hidden mb-4 relative">
-                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-slate-800 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
-                                <i class="fa-solid fa-star text-brand-sun"></i> ${p.rating}
-                            </span>
-                        </div>
-                        <span class="text-xs font-semibold text-brand-600 uppercase tracking-wider">${p.category}</span>
-                        <h3 class="font-display font-bold text-base text-slate-900 mt-1">${p.name}</h3>
-                        <p class="text-xs text-slate-500 mt-1 line-clamp-2">${p.desc}</p>
-                    </div>
-                    <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
-                        <span class="font-display font-bold text-xl text-brand-600">$${p.price.toFixed(2)}</span>
-                        <button onclick="addToCart('${p.name}', ${p.price}, '${p.image}')" class="bg-slate-900 hover:bg-brand-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium transition flex items-center gap-2 active:scale-95">
-                            <i class="fa-solid fa-cart-plus"></i> Add
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // Filter category switch
-        function filterCategory(category, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.className = "filter-btn bg-white hover:bg-slate-100 text-slate-600 border border-slate-200 px-4 py-2 rounded-xl text-sm font-medium transition";
-            });
-            btn.className = "filter-btn active bg-slate-900 text-white px-4 py-2 rounded-xl text-sm font-medium transition";
-            renderProducts(category);
-        }
-
-        // Payment Method Selection
-        function setPaymentMethod(method) {
-            currentPayment = method;
-            ['venmo', 'zelle', 'card'].forEach(m => {
-                const btn = document.getElementById(`pay-${m}`);
-                const fields = document.getElementById(`fields-${m}`);
-                if (m === method) {
-                    btn.className = "payment-tab border-2 border-brand-600 bg-brand-50 rounded-xl p-3 text-center font-display font-bold text-xs text-brand-700 transition";
-                    fields.classList.remove('hidden');
-                } else {
-                    btn.className = "payment-tab border-2 border-slate-200 rounded-xl p-3 text-center font-display font-bold text-xs text-slate-600 transition";
-                    fields.classList.add('hidden');
-                }
-            });
-        }
-
-        // Cart Management
-        function addToCart(name, price, image) {
-            const existing = cart.find(item => item.name === name);
-            if (existing) {
-                existing.qty += 1;
-            } else {
-                cart.push({ name, price, image, qty: 1 });
-            }
-            updateCartUI();
-            showToast("Added to Cart!", `${name} is now in your bag.`);
-        }
-
-        function updateQuantity(name, change) {
-            const item = cart.find(i => i.name === name);
-            if (item) {
-                item.qty += change;
-                if (item.qty <= 0) {
-                    cart = cart.filter(i => i.name !== name);
-                }
-            }
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const badge = document.getElementById('cart-badge');
-            const itemsContainer = document.getElementById('cart-items');
-            const subtotalEl = document.getElementById('cart-subtotal');
-            const totalEl = document.getElementById('cart-total');
-            const fulfillmentLabel = document.getElementById('cart-fulfillment-label');
-
-            const totalCount = cart.reduce((sum, i) => sum + i.qty, 0);
-            badge.innerText = totalCount;
-
-            itemsContainer.innerHTML = '';
-
-            if (cart.length === 0) {
-                itemsContainer.innerHTML = `
-                    <div class="text-center py-16 space-y-3">
-                        <i class="fa-solid fa-basket-shopping text-4xl text-slate-300"></i>
-                        <p class="font-display font-medium text-slate-500">Your cart is empty</p>
-                        <p class="text-xs text-slate-400">Add some $3-$8 DIY kits or ornaments!</p>
-                    </div>
-                `;
-                subtotalEl.innerText = "$0.00";
-                totalEl.innerText = "$0.00";
-                return;
-            }
-
-            let subtotal = 0;
-            cart.forEach(item => {
-                subtotal += item.price * item.qty;
-                const div = document.createElement('div');
-                div.className = "flex items-center gap-4 bg-slate-50 p-3 rounded-2xl border border-slate-100";
-                div.innerHTML = `
-                    <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover bg-white">
-                    <div class="flex-1">
-                        <h4 class="font-display font-bold text-sm text-slate-900">${item.name}</h4>
-                        <p class="text-xs text-brand-600 font-semibold">$${item.price.toFixed(2)}</p>
-                        <div class="flex items-center gap-2 mt-2">
-                            <button onclick="updateQuantity('${item.name}', -1)" class="w-6 h-6 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-xs font-bold hover:bg-slate-100">-</button>
-                            <span class="text-xs font-bold">${item.qty}</span>
-                            <button onclick="updateQuantity('${item.name}', 1)" class="w-6 h-6 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-xs font-bold hover:bg-slate-100">+</button>
-                        </div>
-                    </div>
-                `;
-                itemsContainer.appendChild(div);
-            });
-
-            subtotalEl.innerText = `$${subtotal.toFixed(2)}`;
-
-            let shippingFee = 0;
-            if (fulfillmentType === 'shipping') {
-                shippingFee = 4.99;
-                fulfillmentLabel.innerText = "US Mail Shipping ($4.99)";
-            } else {
-                shippingFee = subtotal >= 25 || subtotal === 0 ? 0 : 3.00;
-                fulfillmentLabel.innerText = shippingFee === 0 ? "Free Local Gorge Delivery ($0)" : "Gorge Valley Delivery ($3.00)";
-            }
-
-            const grandTotal = subtotal + shippingFee;
-            totalEl.innerText = `$${grandTotal.toFixed(2)}`;
-        }
-
-        function toggleCart() {
-            const drawer = document.getElementById('cart-drawer');
-            drawer.classList.toggle('hidden');
-        }
-
-        function updateFulfillmentType(type) {
-            fulfillmentType = type;
-            updateCartUI();
-        }
-
-        function openCheckoutModal() {
-            if (cart.length === 0) {
-                showToast("Cart is empty", "Please add items before checking out.", "error");
-                return;
-            }
-            toggleCart();
-            document.getElementById('checkout-modal').classList.remove('hidden');
-        }
-
-        function closeCheckoutModal() {
-            document.getElementById('checkout-modal').classList.add('hidden');
-        }
-
-        function openCustomModal() {
-            document.getElementById('custom-modal').classList.remove('hidden');
-        }
-
-        function closeCustomModal() {
-            document.getElementById('custom-modal').classList.add('hidden');
-        }
-
-        function submitOrder(e) {
-            e.preventDefault();
-            closeCheckoutModal();
-            cart = [];
-            updateCartUI();
-            showToast("Order Placed Successfully! 🎉", `We've recorded your order and will text you to coordinate drop-off via ${currentPayment.toUpperCase()}.`);
-        }
-
-        function submitCustomRequest(e) {
-            e.preventDefault();
-            closeCustomModal();
-            showToast("Request Received!", "We'll review your custom request and email you back soon.");
-        }
-
-        function showToast(title, desc, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastTitle = document.getElementById('toast-title');
-            const toastDesc = document.getElementById('toast-desc');
-            const toastIcon = document.getElementById('toast-icon');
-
-            toastTitle.innerText = title;
-            toastDesc.innerText = desc;
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            if(type === 'error') {
-                toastIcon.className = "fa-solid fa-circle-exclamation text-rose-500 text-xl";
-            } else {
-                toastIcon.className = "fa-solid fa-circle-check text-brand-500 text-xl";
-            }
-
-            toast.classList.remove('translate-y-32', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-32', 'opacity-0');
-            }, 3500);
-        }
-
-        window.onload = function() {
-            renderProducts('all');
-        }
-    </script>
-</body>
-</html>
+            <!-- Product 1: Table-Top Balancing Game -->
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col">
+                <div class="bg-slate-100 h-48 flex items-center justify-center text-slate-400 relative">
+                    <i class="fa-solid fa-shapes
